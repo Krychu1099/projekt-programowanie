@@ -1,0 +1,1 @@
+W pliku Models/MyDbContext.cs należy zmienić ścieżkę do bazy danych
