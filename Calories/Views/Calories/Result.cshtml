@@ -1,0 +1,14 @@
+﻿@model Calories.Models.CaloriesModel;
+@{
+    ViewData["Title"] = "Wynik";
+    CaloriesModel calories = ViewBag.calories;
+}
+
+<div>
+    <ul>
+        <li>Wiek: @calories.Age</li>
+        <li>Waga: @calories.Weight</li>
+        <li>Wzrost: @calories.Height</li>
+    </ul>
+    <h2>Twoje zapotrzebowanie kaloryczne to <b>@calories.CalorieRequirement</b> kalorii.</h2>
+</div>

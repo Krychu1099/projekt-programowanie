@@ -1,0 +1,40 @@
+﻿@model Calories.Models.CaloriesModel;
+
+@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    List<CaloriesModel> userCalories = ViewBag.userCalories as List<CaloriesModel>;
+
+    if (HttpContextAccessor.HttpContext.Session.GetString("UserId") != null)
+    {
+        ViewData["Title"] = "Zapotrzebowanie kaloryczne - " + HttpContextAccessor.HttpContext.Session.GetString("Username");
+    } else
+    {
+        ViewData["Title"] = "Twoje zapotrzebowanie kaloryczne";
+    }
+}
+
+<h1>Witaj @ViewBag.username</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Data</th>
+            <th scope="col">Waga</th>
+            <th scope="col">Zapotrzebowanie</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (userCalories != null && userCalories.Count >= 1)
+        {
+            @foreach (var data in userCalories)
+            {
+                <tr>
+                    <td>@data.Date</td>
+                    <td>@data.Weight</td>
+                    <td>@data.CalorieRequirement</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

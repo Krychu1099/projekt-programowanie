@@ -1,0 +1,102 @@
+﻿@{
+    ViewData["Title"] = "Obliczanie zapotrzebowania kalorycznego";
+}
+
+@if (ViewBag.userId != null)
+{
+    <div>
+        <h1>Witaj @ViewBag.username, oblicz swoje zapotrzebowanie kaloryczne</h1>
+        <hr />
+    </div>
+}
+else
+{
+    <div>
+        <h1>Oblicz swoje zapotrzebowanie kaloryczne</h1>
+        <hr />
+    </div>
+}
+
+<form action="/Calories/Index" method="post">
+    <div class="mb-3">
+        <div>Wybierz płeć</div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="Gender" id="gender1" value="woman">
+            <label class="form-check-label" for="gender1">
+                Kobieta
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="Gender" id="gender2" value="man">
+            <label class="form-check-label" for="gender2">
+                Mężczyzna
+            </label>
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label for="height" class="form-label">Wzrost</label>
+        <input type="number" class="form-control" id="height" name="Height">
+    </div>
+
+    <div class="mb-3">
+        <label for="weight" class="form-label">Waga</label>
+        <input type="number" class="form-control" id="weight" name="Weight">
+    </div>
+
+    <div class="mb-3">
+        <label for="age" class="form-label">Wiek</label>
+        <input type="number" class="form-control" id="age" name="Age">
+    </div>
+
+    <div class="mb-3">
+        <div>
+            Określ swój poziom aktywności w ciągu dnia:
+            <ul>
+                <li><b>Bardzo mała</b> - praca siedząca, niski poziom aktywności fizycznej</li>
+                <li><b>Mała</b> - praca nie fizyczna, trening 2 razy w tygodniu</li>
+                <li><b>Średnia</b> - lekka praca fizyczna, trening 3-4 razy w tygodniu</li>
+                <li><b>Wysoka</b> - praca fizyczna, trening 5 razy w tygodniu</li>
+                <li><b>Bardzo wysoka</b> - ciężka praca fizyczna, codzienny trening</li>
+            </ul>
+        </div>
+        <label for="activity">Poziom aktywność:</label>
+        <select class="form-select" name="Activity" id="activity">
+            <option value="bMala">Bardzo mała</option>
+            <option value="Mala">Mala</option>
+            <option value="Srednia">Średnia</option>
+            <option value="Wyskoa">Wysoka</option>
+            <option value="bWysoka">Bardzo wysoka</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label for="goal">Cel:</label>
+        <select class="form-select" name="Goal" id="goal">
+            <option value="loss">Chcę schudnąć</option>
+            <option value="maintenance">Chcę utrzymać wagę</option>
+            <option value="build">Chcę przytyć</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label for="somatotype">Somatotyp:</label>
+        <select class="form-select" name="Somatotype" id="somatotype">
+            <option value="ectomorph">Ektomorfik</option>
+            <option value="mesomorph">Mezomorfik</option>
+            <option value="endomorph">Endomorfik</option>
+        </select>
+    </div>
+
+    @if (ViewData["UserId"] != null)
+    {
+        <input type="hidden" name="userId" value="@ViewData["UserId"]" />
+    }
+    else
+    {
+        <input type="hidden" name="userId" value="0" />
+    }
+
+
+    <button type="submit" class="btn btn-primary">Oblicz</button>
+</form>
